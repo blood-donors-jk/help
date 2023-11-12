@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation Website</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .background-image {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiSWvSFSsliyZ3Ln3S3h-H-lATiz7RLs4IQQ&usqp=CAU');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #ff5252;
+        }
+
+        #filter-section {
+            margin-top: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            color: #ffffff;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        #donor-details {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .donor-box {
+            width: 200px;
+            padding: 10px;
+            margin: 10px;
+            background-color: #4285f4;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .donor-box p {
+            margin: 0;
+            color: white;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #357ae8;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            text-align: center;
+            border-radius: 30px;
+            color: white;
+            position: bottom;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-image">
+        <!-- Header Section -->
+        <header>
+            <h1>DONATE BLOOD  SAVE LIVES</h1>
+            <p>Note Currently Available in District Poonch Only</p>
+        </header>
+
+        <!-- Filter Section -->
+        <section id="filter-section">
+            <label for="tehsil-filter">Select Tehsil:</label>
+            <select id="tehsil-filter">
+                <option value="haveli">Haveli</option>
+                <option value="mendhar">Mendhar</option>
+                <option value="surankote">Surankote</option>
+                <option value="mandi">Mandi</option>
+            </select>
+
+            <label for="blood-group-filter">Select Blood Group:</label>
+            <select id="blood-group-filter">
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+            </select>
+        </section>
+
+        <!-- Donor Details Section -->
+        <section id="donor-details">
+            <!-- Add donor details dynamically using JavaScript -->
+        </section>
+
+        <!-- Search Button -->
+        <button id="search-btn" onclick="searchDonors()">Search</button>
+
+        <!-- Donate Blood Button -->
+        <a href="https://survey.forms.app/seytonic/blooddonors">
+            <button>Donate Blood</button>
+            <p></p>
+        </a>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        
+        <p>Website created by Mohsin Khawaja</p>
+       
+    </footer>
+
+    <script>
+        // Sample donor data (replace with your data)
+        const donorData = [
+            { name: 'Mohsin', bloodGroup: 'AB+', tehsil: 'surankote', phoneNumber: '7780849058' },
+            { name: 'Yassar H Shah', bloodGroup: 'AB+', tehsil: 'surankote', phoneNumber: '9149476943' },
+            { name: 'Bilal Sufi', bloodGroup: 'B+', tehsil: 'surankote', phoneNumber: '7006109628' },
+            { name: 'Adrees Manhas', bloodGroup: 'O-', tehsil: 'surankote', phoneNumber: '9596433732' },
+            // Add more donor details
+        ];
+
+        function searchDonors() {
+            const selectedTehsil = document.getElementById('tehsil-filter').value;
+            const selectedBloodGroup = document.getElementById('blood-group-filter').value;
+            const donorDetailsSection = document.getElementById('donor-details');
+
+            // Clear previous donor details
+            donorDetailsSection.innerHTML = '';
+
+            // Filter and display donors based on the selected Tehsil and Blood Group
+            const filteredDonors = donorData.filter(donor =>
+                donor.tehsil === selectedTehsil && donor.bloodGroup === selectedBloodGroup
+            );
+
+            filteredDonors.forEach(donor => {
+                const donorBox = document.createElement('div');
+                donorBox.classList.add('donor-box');
+                donorBox.innerHTML = `<p>Name: ${donor.name}</p>
+                                      <p>Blood Group: ${donor.bloodGroup}</p>
+                                      <p>Tehsil: ${donor.tehsil}</p>
+                                      <p>Phone Number: ${donor.phoneNumber}</p>`;
+                donorDetailsSection.appendChild(donorBox);
+            });
+        }
+    </script>
+</body>
+
+</html>
